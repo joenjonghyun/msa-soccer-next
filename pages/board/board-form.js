@@ -1,23 +1,25 @@
 import React,{useState} from 'react'
 import style from "board/style/board-form.module.css";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import {addTask} from '../../redux/reducers/board.reducer'
 
 export default function BoardhtmlForm(){
     const [inputs, setInputs] = useState({})
-    const {passengerId, name, teamId, subject} = inputs
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         e.preventDefault()
-        const {value, name} = e.target
+        const {inputs, name} = e.target
         setInputs({
             ...inputs,
-            [name] : value
+            [name] : inputs
         })
     }
     const handleSubmit = e => {
         e.preventDefault()
-        const res = {passengerId, name, teamId, subject}
-        alert(`등록할 게시글 : ${JSON.stringify(res)}`)
+        alert('value?' +inputs)
+        if(inputs) dispatch(addTask({task: inputs}))
         axios.post('http://localhost:5000/api/board/write', inputs)
         .then(res => {
             alert(JSON.stringify(res.data))
@@ -30,13 +32,14 @@ export default function BoardhtmlForm(){
             <htmlForm action="">
             <div className={style.row}>
                 <div className={style.col-25}>
-                <label className={style.label} htmlFor="passengerId">게시글 작성자 ID</label>
+                <label className={style.label} htmlFor="passengerId">글 제목</label>
                 </div>
                 <div className={style.col-75}>
                 <input type="text" className={style.inputText} onChange={handleChange}
-                id="passengerId" name="passengerId" placeholder="게시글 작성자 ID 입력"/>
+                id="title" name="title" placeholder="글 제목 입력"/>
                 </div>
             </div>
+            {/**
             <div className={style.row}>
                 <div className={style.col-25}>
                 <label htmlFor="name">게시글 작성자 이름</label>
@@ -68,6 +71,7 @@ export default function BoardhtmlForm(){
                 </div>
             </div>
             <br/>
+            */}
             <div className={style.row}>
                 <input type="submit" onClick={handleSubmit} className={style.inputSubmit}
                 value="Submit"/>

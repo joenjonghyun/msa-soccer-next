@@ -7,6 +7,7 @@ export default function User(){
     <nav>
       <ul>
         <li className={style.li}> <Link href='/user/login'>로그인</Link> </li>
+        <li className={style.li}> <Link href='/user/logout'>로그아웃</Link> </li>
         <li className={style.li}> <Link href='/user/join'>회원가입</Link> </li>
         <li className={style.li}> <Link href='/user/user-list'>회원목록</Link> </li>
       </ul>
