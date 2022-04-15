@@ -9,7 +9,7 @@ export default function Nav(){
         <li className={style.li}> <Link href='/'>Home</Link> </li>
         <li className={style.li}> <Link href='/admin/dashboard'>DashBoard</Link> </li>
         <li className={style.li}> <Link href='/common/basiclink'>BasicLink</Link> </li>
-        <li className={style.li}> <Link href='/common/todolink'>TodoLink</Link> </li>
+        <li className={style.li}> <Link href='/todo/todo-list'>TodoList</Link> </li>
         <li className={style.li}> <Link href='/common/boardlink'>BoardLink</Link> </li>
         <li className={style.li}> <Link href='/common/game-link'>GameLink</Link> </li>
         <li className={style.li}> <Link href='/common/user-link'>UserLink</Link> </li>
