@@ -1,32 +1,64 @@
-import { PayloadAction } from '@reduxjs/toolkit'
-import { call, delay, put, takeLatest } from 'redux-saga/effects'
-import { todoActions } from '../reducers/todoReducer.ts';
-import { postTodo} from '../api/todoApi.ts'
-
-interface TodoJoinType{
+import { call, delay, put, takeLatest} from 'redux-saga/effects'
+import { addTodoApi } from '../api/todoApi.ts'
+import { todoActions } from '../../redux/reducers/todoReducer.ts';
+interface TodoType{
     type: string;
     payload: {
-     userid: '', task: '', completed: ''
+        task: String
     }
 }
-interface TodoJoinSuccessType{
+interface TodoSuccessType{
     type: string;
     payload: {
-        userid: string
+        task: string
     }
 }
-
-
-function* join(todo: TodoJoinType){
+function* addTodo(todo: TodoType){
     try{
-        alert(' *** saga내부 join 성공 *** '+ JSON.stringify(todo))
-        const response : TodoJoinSuccessType = yield postTodo(todo.payload)
-        yield put(todoActions.joinSuccess(response))
+        alert('사가내부진입')
+        const response: TodoSuccessType = yield addTodoApi(todo.payload)
+        yield put(todoActions.taskSuccess(response))
+       
     }catch(error){
-         alert(' *** saga내부 join 실패 *** ')
-         yield put(todoActions.joinFailure(error)) 
+        yield put(todoActions.taskFailure(error))
+        alert('사가내부진입실패')
     }
 }
-export function* todoJoin(){
-    yield takeLatest(todoActions.joinRequest, join)
+function* getTodos(todo: TodoType){
+    try{
+        const response: TodoSuccessType = yield addTodoApi(todo.payload)
+        yield put(todoActions.taskSuccess(response))
+       
+    }catch(error){
+        yield put(todoActions.taskFailure(error))
+    }
+}
+function* modifyTodo(todo: TodoType){
+    try{
+        const response: TodoSuccessType = yield addTodoApi(todo.payload)
+        yield put(todoActions.taskSuccess(response))
+    }catch(error){
+        yield put(todoActions.taskFailure(error))
+    }
+}
+function* removeTodo(todo: TodoType){
+    try{
+        const response: TodoSuccessType = yield addTodoApi(todo.payload)
+        yield put(todoActions.taskSuccess(response))
+       
+    }catch(error){
+        yield put(todoActions.taskFailure(error))
+    }
+}
+export function* watchAddTodo(){
+    yield takeLatest(todoActions.addTodoRequest, addTodo)
+}
+export function* watchGetTodos(){
+    yield takeLatest(todoActions.getTodosRequest, getTodos)
+}
+export function* watchModifyTodo(){
+    yield takeLatest(todoActions.modifyTodoRequest, modifyTodo)
+}
+export function* watchRemoveTodo(){
+    yield takeLatest(todoActions.removeTodoRequest, removeTodo)
 }
