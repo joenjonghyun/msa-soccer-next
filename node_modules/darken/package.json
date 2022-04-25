@@ -1,0 +1,43 @@
+{
+  "name": "darken",
+  "version": "1.5.0",
+  "description": "Darkmode made easy",
+  "scripts": {
+    "build": "microbundle --sourcemap false",
+    "dev": "microbundle watch --sourcemap false",
+    "test": "jest --coverage=true",
+    "test:watch": "jest --watch --coverage=false"
+  },
+  "author": "Colin Espinas",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/ColinEspinas/darken.git"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.0",
+    "jest": "^25.1.0",
+    "microbundle": "^0.11.0"
+  },
+  "files": [
+    "dist/**/*",
+    "src/index.d.ts",
+    "src/index.js"
+  ],
+  "source": "src/index.js",
+  "types": "src/index.d.ts",
+  "main": "dist/darken.js",
+  "browser": "dist/darken.umd.js",
+  "module": "dist/darken.mjs",
+  "unpkg": "dist/darken.umd.js",
+  "dependencies": {},
+  "keywords": [
+    "dark",
+    "mode",
+    "darkmode",
+    "darken"
+  ]
+}
